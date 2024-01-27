@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Авторизация</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600" rel="stylesheet">
+  </head>
+  <%= render "shared/header" %>
+    <body>  
+      <div class="forms_wrapper">      
+        <div class="form" id="auth_reg">
+            <div class="label_text" style="font-size:x-large">
+                <%=t :authorization%>
+            </div>
+            <div class="form2" style="padding: 35px;">
+            <div>
+                <%= form_with url: "/users/authorization", method: :post do |form| %>
+                    <%= form.label :email, "E-mail" , {class: "label_text", id: "cr"}%>
+                    <%= form.email_field :email, id: "auth_reg" %>
+                    <%= form.label :password, (t :password), {class: "label_text", id: "cr"} %>
+                    <%= form.password_field :password, id: "auth_reg" %>
+                    <%= form.label  @error, {class: "label_text", id: "er"} %>
+                    <%= form.submit (t :log_in), class:"btn", id: "auth_reg2" %>
+                <% end %>
+            </div>
+            <div>
+                <p style="margin-bottom:0"><%=t :reg_text%>  <a href="/users/registration" style="color: #263507d6"><%=t :here%> </a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+    </body>
+<br />
+</html>

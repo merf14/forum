@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%if @show_error%>
+      <title><%= t :p_not_found%></title>
+    <%else%>
+      <title><%= @theme.title%></title>
+    <%end%>
+  </head>
+  <%= render "shared/header" %>
+    <body>   
+        <%if @show_error%>
+            <div class="label_text" id="er" style="margin: 200px">
+                <%= @show_error%>
+            </div>    
+        <%else%> 
+        <div class="forms_wrapper" id="show">
+            <div class="form">
+                    <div class="form2">
+                        <div class="wrapper">
+                            <div class="box1">
+                            <p class="title"><%=@theme.title%></p>
+                            </div>
+                            <div class="box2">
+                            <p class="author" style="cursor: pointer;" onclick="location.href='/users/profile/<%=@author.id%>';">
+                                <%= t :author%>: <%= @author.name %>
+                            </p>
+                            </div>
+                            <div class="box3" style="margin-bottom: 70px;">
+                            <div class="text"><pre class="text"><%= @theme.text%></pre></div>
+                            </div>
+                            <%if (@author.id==session[:current_user_id] || session[:current_user_id]==1)%>
+                                <div>
+                                    <%= button_to (t :delete_theme), "/themes/delete", form: { data: { turbo_confirm: ((t :delete_theme)+"?"), turbo_method: "post"}}, class:"btn", id:"tiny"%> 
+                                </div>
+                            <%end%>
+                        </div>
+                    </div>
+            </div>
+            <%if @delete_error%>
+                <div class="label_text" id="er" style="margin: 20px">
+                    <%= @delete_error%>
+                </div>
+            <%end%>    
+            <div class="form">
+                <%if session[:current_user_id]%>
+                    <div class="label_text">
+                        <%= t :answer%>
+                    </div>
+                    <div class="form2" id="comForm">
+                        <%= form_with url: "/themes/create_ans", method: :post do |form| %>
+                            <%= form.text_area :text, size: "300x5" %>
+                            <%= form.label  @ans_error, {class: "label_text", id: "er"} %>
+                            <%= form.submit (t :answer), class:"btn" %>
+                        <% end %>
+                    </div>
+                <%end%>
+            </div>
+            <div class="form">
+                <% if (@answers != [])%>
+                    <div class="label_text">
+                        <%= t :answers%>
+                    </div>
+                    <% @answers.each do |answer|%>
+                    <div class="form2" >                  
+                        <div class="wrapper">
+                            <div class="box1">
+                                <p class="author_com"  onclick="location.href='/users/profile/<%=answer.user_id%>';">
+                                    <%=User.find_by(id: answer.user_id).name%>
+                                </p>
+                            </div>
+                            <div class="box3">
+                                <p class="text_hidden"><%= answer.text %></p>
+                            </div>
+                            <%if (answer.user_id==session[:current_user_id] || session[:current_user_id]==1)%>
+                                <div>
+                                    <%=button_to (t :delete_answer), '/themes/delete_ans', method: 'post',form: { data: { turbo_confirm: ((t :delete_answer)+"?"), turbo_method: "post"}}, params:{id: answer.id}, class:"btn", id:"tiny"%>            
+                                </div>
+                            <%end%>
+                            <%if @delete_ans_error%>
+                                <div class="label_text" id="er" style="margin: 20px">
+                                    <%= @delete_ans_error%>
+                                </div>
+                            <%end%>  
+                        </div>                     
+                    </div>
+                    <%end%> 
+                <%else%>
+                    <div class="label_text">
+                        <%= t :no_answers%>
+                    </div>
+                <%end%>
+            </div>
+        </div>
+    <%end%>
+        <br />
+    </body>
+    <br />
+</html>

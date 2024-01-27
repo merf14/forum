@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Создание</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600" rel="stylesheet">
+  </head>
+  <%= render "shared/header" %>
+    <body>  
+      <div class="forms_wrapper">      
+        <div class="form">
+          <div class="form2" style="padding-top:50px; padding-bottom:40px;">
+            <%= form_with url: "/themes/create", method: :post do |form| %>
+              <%= form.label :title, (t :title), {class: "label_text", id: "cr"}%>
+              <%= form.text_field :title, id: "cr"%>
+              <%= form.label :text, (t :text), {class: "label_text", id: "cr"}%>
+              <%= form.text_area :text, size: "300x30", id: "cr"%>
+              <%= form.label  @error, {class: "label_text", id: "er"} %>
+              <%= form.submit (t :post), class:"btn" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <br />
+    </body>
+<br />
+</html>

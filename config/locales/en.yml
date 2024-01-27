@@ -1,0 +1,88 @@
+en:
+  password: "Password"
+  log_in: "Log in"
+  reg_text: "If you don't have an account, you can registrate "
+  here: "here"
+  authorization: "Authorization"
+  registration: "Registration"
+  password_rep: "Repeate password"
+  name: "Name"
+  register: "Registrate"
+  auth_text: "If you already have an account, you can log in"
+  main: "Go to main"
+  title: "Title"
+  text: "Your question"
+  post: "Post"
+  author: "Author"
+  delete_theme: "Delete theme"
+  answer: "Answer"
+  answers: "Answers"
+  delete_answer: "Delete answer"
+  no_answers: "No answers..."
+  create: "Create theme"
+  no_themes: "No themes..."
+  profile_information: "Profile information"
+  user_name: "User name"
+  edit: "Edit"
+  delete_user: "Delete account"
+  log_out: "Log out"
+  your_themes: "Your themes"
+  themes: "Themes"
+  no_your_themes: "You haven't created themes yet"
+  no_u_themes: "hasn't created themes yet"
+  your_answers: "Your answers"
+  no_your_answers: "You haven't answered yet"
+  no_u_answers: "hasn't answered yet"
+  password_confirm: "Enter your password to confirm"
+  save: "Save"
+  edit_user: "Edit your account"
+  activerecord:
+    errors:
+      messages:
+        record_invalid: '%{errors}'
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: must be accepted
+      blank: can't be blank
+      confirmation: doesn't match %{attribute}
+      empty: can't be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      in: must be in %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      model_invalid: 'Validation failed: %{errors}'
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      other_than: must be other than %{count}
+      present: must be blank
+      required: must exist
+      taken: has already been taken
+      too_long:
+        one: is too long (maximum is %{count} character)
+        other: is too long (maximum is %{count} characters)
+      too_short:
+        one: is too short (minimum is %{count} character)
+        other: is too short (minimum is %{count} characters)
+      wrong_length:
+        one: is the wrong length (should be %{count} character)
+        other: is the wrong length (should be %{count} characters)
+    template:
+      body: 'There were problems with the following fields:'
+      header:
+        one: "%{count} error prohibited this %{model} from being saved"
+        other: "%{count} errors prohibited this %{model} from being saved"
+  pas_not_equal: "Passwords are not equal"
+  wrong_name: "Forbidden user name"
+  wrong_pas:  "Wrong password"
+  u_not_found: "User not found"
+  u_deleted: "User deleted"
+  delete_error: "An error occurred during deletion" 
+  p_not_found: "Page not found"

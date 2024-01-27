@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Главная</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600" rel="stylesheet">
+  </head>
+  <%= render "shared/header" %>
+  <body>
+    <div class="forms_wrapper">
+      <%if session[:current_user_id]%>
+      <div class="label">
+        <button class="btn_create" onclick="location.href='/themes/create';"><%= t :create%></button>
+      </div>
+      <%end%>
+      <div class="form">
+        <form>
+          <% if (@themes != [])%>
+            <% @themes.each do |theme|%>
+              <div class="form2" id="clickable" onclick="location.href='/themes/show/<%=theme.id%>';">
+                  <div class="wrapper2">
+                    <div class="box1">
+                      <p class="title"><%=theme.title%></p>
+                    </div>
+                    <div class="box2">
+                      <p class="author">
+                        <%= t :author %>: <%= User.find_by(id: theme.user_id).name %>
+                      </p>
+                    </div>
+                    <div class="box3">
+                      <%i=theme.text[0..630].rindex(" ")%>
+                      <p class="text_hidden"><%= theme.text[0..i-1] %>...</p>
+                    </div>
+                  </div>
+              </div>
+            <%end%>
+          <%else%>
+            <div class="label_text">
+              <%= t :no_themes%>
+            </div>
+          <%end%>
+        </form>
+      </div>
+    </div>
+    <br />
+  </body>
+</html>

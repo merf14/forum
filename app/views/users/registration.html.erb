@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Регистрация</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600" rel="stylesheet">
+  </head>
+  <%= render "shared/header" %>
+    <body>  
+      <div class="forms_wrapper">      
+        <div class="form" id="auth_reg">
+            <div class="label_text" style="font-size:x-large">
+                <%=t :registration%>
+            </div>
+            <div class="form2" style="padding: 35px;">
+            <div>
+                <%= form_with url: "/users/registration", method: :post do |form| %>
+                    <%= form.label :name, (t :name), {class: "label_text", id: "cr"} %>
+                    <%= form.text_field :name, id: "auth_reg" %>
+                    <%= form.label :email, "E-mail" , {class: "label_text", id: "cr"}%>
+                    <%= form.email_field :email, id: "auth_reg" %>
+                    <%= form.label :password, (t :password), {class: "label_text", id: "cr"} %>
+                    <%= form.password_field :password, id: "auth_reg" %>
+                    <%= form.label :password_rep, (t :password_rep), {class: "label_text", id: "cr"} %>
+                    <%= form.password_field :password_rep, id: "auth_reg" %>
+                    <%= form.label  @error, {class: "label_text", id: "er"} %>
+                    <%= form.submit (t :register), class:"btn", id: "auth_reg2" %>
+                <% end %>
+            </div>
+            <div>
+                <p style="margin-bottom:0"><%=t :auth_text%> <a href="/users/authorization" style="color: #263507d6"><%=t :here%></a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+    </body>
+<br />
+</html>

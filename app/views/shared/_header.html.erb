@@ -1,0 +1,40 @@
+<header>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:500" rel="stylesheet">
+      <div class="header_wrapper">
+        <div class="header_box1">
+          <%if (request.original_url != "http://localhost:3000/")%>
+            <a href="/" class="htext"><%= t :main%></a>
+          <%end%>
+        </div>
+        <div class="header_box4">
+           <%=button_to "En", '/users/set_en', method: 'post', class:"btn", id:"lang", form: {style: "display:inline"}%>
+           <%=button_to "Ru", '/users/set_ru', method: 'post', class:"btn", id:"lang", form: {style: "display:inline"}%>
+        </div>
+      <%if (request.original_url != "http://localhost:3000/users/authorization")  and (request.original_url != "http://localhost:3000/users/registration")%>
+        <%if session[:current_user_id]%>
+          <div class="header_box2">
+            <%if (request.original_url != ("http://localhost:3000/users/profile/"+(session[:current_user_id]).to_s))  %>
+              <p class="htext" style="padding: 0" onclick="location.href='/users/profile/<%=session[:current_user_id]%>';">
+                  <%=User.find_by(id: session[:current_user_id]).name%>
+              </p>
+            <%end%>
+          </div>
+        <%else%>
+          <div class="header_box3">
+            <%=button_to (t :log_in), '/users/authorization', method: 'get', class:"btn"%>
+          </div>
+        <%end%>  
+      <%end%>       
+      </div>
+      <div id="preloader">
+        <div>
+        Подождите, идет загрузка сайта...
+        </div>
+      </div>
+      <script>
+        window.onload = function() {
+          setTimeout(function() {
+            document.getElementById("preloader").style.display = "none";}, 400);
+        };
+      </script>
+</header>

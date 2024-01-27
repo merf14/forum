@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%if @show_error%>
+      <title><%= t :u_not_found%></title>
+    <%else%>
+      <title><%= @user.name%></title>
+    <%end%>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600" rel="stylesheet">
+  </head>
+  <%= render "shared/header" %>
+    <body>
+    <%if @show_error%>
+      <div class="label_text" id="er" style="margin: 200px">
+        <%= @show_error%>
+      </div>
+    <%else%>
+      <div class="forms_wrapper" id="show">
+        <%if session[:current_user_id] == @user.id || session[:current_user_id]==1%>
+        <div class="form">
+          <div class="label_text">
+            <%= t :profile_information%>
+          </div>
+            <div class="form2", style="padding: 15px 30px 10px; width:640px;height: 230px">
+              <div class="wrapper">
+                <div class="box1">
+                  <p><strong><%= t :user_name%></strong>: <%=@user.name%></p>
+                </div>
+                <div class="box2">
+                  <p><strong>E-mail:</strong> <%=@user.email%></p>
+                </div>
+                <div class="box3" id="grid">
+                <%if session[:current_user_id] == @user.id%>
+                  <div class="box31">
+                    <button class="btn" id="change" onclick="location.href='/users/change';"><%= t :edit%></button>
+                  </div>
+                  <div class="box32">
+                    <%= button_to (t :log_out), "/users/logout", form: { data: {turbo_method: "post"}}, class:"btn", id:"logout"  %>
+                  </div>
+                <%end%>
+                  <div class="box33">
+                    <%= button_to (t :delete_user), "/users/delete", form: { data: { turbo_confirm: ((t :delete_user) + "?"), turbo_method: "post"}}, class:"btn", id:"delete"%>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <%if @delete_error%>
+                <div class="label_text" id="er" style="margin: 20px">
+                    <%= @delete_error%>
+                </div>
+        <%end%>   
+        <%end%>
+        <div class="form">
+            <% if (@themes != [])%>
+              <%if session[:current_user_id] == @user.id%>
+                <div class="label_text">
+                  <%= t :your_themes%>
+                </div>
+              <%else%>
+                <div class="label_text">
+                  <%= t :themes%> <%=@user.name%>
+                </div>
+              <%end%>
+              <% @themes.each do |theme|%>
+                <div class="form2" id="clickable" onclick="location.href='/themes/show/<%=theme.id%>';">
+                    <div class="wrapper2">
+                      <div class="box1">
+                        <p class="title"><%=theme.title%></p>
+                      </div>
+                      <div class="box3">
+                        <%i=theme.text[0..630].rindex(" ")%>
+                        <p class="text_hidden"><%= theme.text[0..i-1] %>...</p>
+                      </div>
+                    </div>
+                </div>
+              <%end%>
+            <%else%>
+              <%if session[:current_user_id] == @user.id%>
+                <div class="label_text">
+                  <%= t :no_your_themes%>
+                </div>
+              <%else%>
+                <div class="label_text">
+                  <%=@user.name%> <%= t :no_u_themes%>
+                </div>
+              <%end%>
+            <%end%>
+        </div>
+        <div class="form">
+            <% if (@answers_all != [])%>
+            <%if session[:current_user_id] == @user.id%>
+                <div class="label_text">
+                  <%= t :your_answers%>
+                </div>
+              <%else%>
+                <div class="label_text">
+                  <%= t :answers%> <%=@user.name%>
+                </div>
+              <%end%>
+              <% @answer_theme_id.each do |theme_id|%>
+                <%theme=Theme.find_by(id: theme_id)%>
+                <div class="form2" id="clickable" onclick="location.href='/themes/show/<%=theme.id%>';">
+                    <div class="wrapper2">
+                      <div class="box1">
+                        <p class="title"><%=theme.title%></p>
+                      </div>
+                      <div class="box3">
+                        <%answers=Answer.where(theme_id: theme_id, user_id: @user.id)%>
+                        <% answers.each do |answer|%>
+                          <div class="form3">
+                            <%i=answer.text.length%>
+                            <p class="text_hidden"><strong><%= @user.name%>:</strong> <%= answer.text[0..i-1] %></p>
+                          </div>
+                        <%end%>
+                      </div>
+                    </div>
+                </div>
+              <%end%>
+            <%else%>
+              <%if session[:current_user_id] == @user.id%>
+                <div class="label_text">
+                  <%= t :no_your_answers%>
+                </div>
+              <%else%>
+                <div class="label_text">
+                  <%=@user.name%> <%= t :no_u_answers%>
+                </div>
+              <%end%>
+            <%end%>
+        </div>
+      </div>
+      <%end%>
+      <br />
+    </body>
+</html>
