@@ -1,24 +1,11 @@
-# README
+# Форум
+Сайт-форум с возможностью регистрироваться, создавать посты, просматривать и комментировать посты других пользователей.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Запуск сервера
+Для запуска сервера откройте в консоли директорию проекта и введите `rails s`.
 
-Things you may want to cover:
+## Схема базы данных
+![image](https://github.com/merf14/forum/assets/89605064/3316ae26-f6f0-4290-8ed5-a6873a3f2c4c)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Диаграмма приложения
+![image](https://github.com/merf14/forum/assets/89605064/67760751-a6fe-4b86-8bc1-01e45996afe3)
